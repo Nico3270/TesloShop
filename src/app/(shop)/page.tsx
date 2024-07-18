@@ -1,6 +1,6 @@
-import Image from "next/image";
-import { Montserrat_Alternates } from "next/font/google";
-import { titleFont } from "@/config/fonts";
+export const revalidate = 60; //60 segundos
+
+
 import { Title } from "@/components/ui/title/Title";
 import { ProductGrid } from "@/components/products/product-grid/ProductGrid";
 import { getPaginatedProductsWithImages } from '../../actions/products/product-pagination';

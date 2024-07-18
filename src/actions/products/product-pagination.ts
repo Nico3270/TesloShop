@@ -1,16 +1,19 @@
 "use server";
 
 import prisma from "@/lib/prisma";
+import { Gender } from "@prisma/client";
 
 interface PaginationOptions {
   page?: number;
   take?: number;
+  gender?: string;
 }
 //Solo toma dos imágenes ya que son las dos que muestra al poner el cursor sobre el producto
 
 export const getPaginatedProductsWithImages = async ({
   page = 1,
   take = 12,
+  gender,
 }: PaginationOptions) => {
   if (isNaN(Number(page))) page = 1;
   if (page < 1) page = 1;
@@ -22,22 +25,27 @@ export const getPaginatedProductsWithImages = async ({
       skip: (page - 1) * take,
       include: {
         ProductImage: {
-          take: 3,
+          take: 2,
           select: {
             url: true,
           },
         },
       },
+      where: {
+        gender: gender as Gender,
+      },
     });
 
     //2. Obtener el total de páginas
 
-    const totalCount = await prisma.product.count({});
-    const totalPages = Math.ceil(totalCount/take);
+    const totalCount = await prisma.product.count({where: {
+      gender: gender as Gender,
+    },});
+    const totalPages = Math.ceil(totalCount / take);
 
     return {
-        currentPage: page, 
-        totalPages: totalPages,
+      currentPage: page,
+      totalPages: totalPages,
       products: products.map((product) => ({
         ...product,
         images: product.ProductImage.map((image) => image.url),
@@ -47,3 +55,7 @@ export const getPaginatedProductsWithImages = async ({
     throw new Error("No se pudo cargar los productos");
   }
 };
+
+/// Obtener productos por slug
+
+

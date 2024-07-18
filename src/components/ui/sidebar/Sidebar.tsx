@@ -57,7 +57,7 @@ export const Sidebar = () => {
 
         {/* Input de la busqueda */}
         <div className="relative mt-5">
-          <IoSearchOutline size={20} className="absolute top-2 left-2 " />
+          <IoSearchOutline size={20}  />
           <input
             type="text"
             placeholder="Buscar"

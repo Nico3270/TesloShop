@@ -27,3 +27,8 @@ export const generatePagination = (currentPage:number, totalPages:number ) => {
         1, "....", currentPage-1, currentPage, currentPage+1, "....", totalPages
     ];
 }
+
+
+
+
+

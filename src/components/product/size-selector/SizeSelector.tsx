@@ -4,11 +4,12 @@ import clsx from 'clsx';
 import React from 'react'
 
 interface Props {
-    selectedSize: Size;
+    selectedSize?: Size;
     availableSizes: Size[];
+    onSizeChanged: (size:Size) => void;
 }
 
-export const SizeSelector = ({selectedSize, availableSizes}:Props) => {
+export const SizeSelector = ({selectedSize, availableSizes, onSizeChanged}:Props) => {
     
   return (
     <div className='my-5 '>
@@ -17,9 +18,11 @@ export const SizeSelector = ({selectedSize, availableSizes}:Props) => {
         <div className='flex'>
             {
                 availableSizes.map(size => (
-                    <button className={
+                    <button 
+                    onClick={()=> onSizeChanged(size)}
+                    className={
                         clsx(
-                            "mx-2 hover:underline text-lg",
+                            "mx-2 hover:underline text-lg ",
                             {
                                 "underline text-blue-700": size === selectedSize
                             }
