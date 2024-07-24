@@ -3,12 +3,18 @@ import prisma from "../lib/prisma";
 
 async function main() {
   //1. Borrar registros previos
+  await prisma.user.deleteMany();
   await prisma.productImage.deleteMany();
   await prisma.product.deleteMany();
   await prisma.category.deleteMany();
 
   // Ejecutar categorías - Se extraen las categorías del archivo initialData
-  const { categories, products } = initialData;
+  const { categories, products, users } = initialData;
+
+
+  await prisma.user.createMany({
+    data: users
+  });
 
   //A continuación se crea un array con diferentes objetos que se almacenan dentro de categoriesData
   //   [
