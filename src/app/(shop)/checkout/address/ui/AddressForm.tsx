@@ -66,7 +66,7 @@ export const AddressForm = ({ countries, userStoreAddress = {} }: Props) => {
     console.log({ data });
     const {rememberAddress, ...restAddress} = data;
     setErrorMessage("");
-    setAddress(data);
+    setAddress(restAddress);
     if (data.rememberAddress) {
       //Todo: Server Action
       await setUserAddress(restAddress, session!.user.id)
