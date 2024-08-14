@@ -4,12 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run prisma && next build",
     "start": "next start",
     "lint": "next lint",
+    "prisma: deploy": "npx prisma migrate deploy && prisma generate",
     "seed": "ts-node src/seed/seed-database.ts"
   },
   "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@paypal/react-paypal-js": "^8.5.0",
     "@prisma/client": "^5.16.2",
     "bcryptjs": "^2.4.3",
